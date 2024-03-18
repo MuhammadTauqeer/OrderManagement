@@ -1,0 +1,77 @@
+﻿@page "/supplierupdate/{SupplierId}"
+@page "/supplierupdate"
+@using Entities
+
+<h3>@PageHeaderText</h3>
+
+@if (!Saved)
+{
+    <section class="supplier-edit">
+        <h1 class="page-title">Details for @Supplier.Name</h1>
+        <EditForm Model="@Supplier" OnValidSubmit="@HandleValidSubmit"
+                  OnInvalidSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary></ValidationSummary>
+
+
+            <div class="form-group row">
+                <label for="name" class="col-sm-3">Supplier: </label>
+                <InputText id="name" class="form-control col-sm-8" @bind-Value="@Supplier.Name" placeholder="Enter Supplier Name"></InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Supplier.Name)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="adressline1" class="col-sm-3">AdressLine1: </label>
+                <InputText id="adressLine1" class="form-control col-sm-8" @bind-Value="@Supplier.AddressLine1" placeholder="Enter AddressLine1"></InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Supplier.AddressLine1)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="AdressLine2" class="col-sm-3">AdressLine2: </label>
+                <InputText id="adressline2" class="form-control col-sm-8" @bind-Value="@Supplier.AddressLine2" placeholder="Enter AddressLine2"></InputText>
+                <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Supplier.AddressLine2)" />
+            </div>
+
+            <div class="form-group row">
+                <label for="city" class="col-sm-3">City: </label>
+                <InputText id="city" class="form-control col-sm-8" @bind-Value="@Supplier.City" placeholder="Enter City"></InputText>
+
+            </div>
+
+            <div class="form-group row">
+                <label for="zip" class="col-sm-3">Zip code: </label>
+                <InputText id="zip" class="form-control col-sm-8" @bind-Value="@Supplier.PostalCode" placeholder="Enter postal code"></InputText>
+
+            </div>
+
+            <div class="form-group row">
+                <label for="state" class="col-sm-3">State: </label>
+                <InputSelect id="state" class="form-control col-sm-8" @bind-Value="@StateId">
+                    @foreach (var state in States)
+                        {
+                        <option value="@state.Id">@state.Name</option>
+                        }
+                </InputSelect>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary edit-btn">Save Supplier</button>
+
+            @*@if (Supplier.Id > 0)
+                {
+                    <a class="btn btn-danger" @onclick="@DeleteSupplier">
+                        Delete
+                    </a>
+                }*@
+
+            <a class="btn btn-outline-primary" @onclick="@NavigateToMainview">Back to overview</a>
+        </EditForm>
+    </section>
+
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+
+
+}

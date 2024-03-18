@@ -1,0 +1,63 @@
+﻿@page "/supplierdetails/{SupplierId}"
+
+@if (Supplier == null || Supplier.State == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <h2 class="page-title">Details for @Supplier.Name</h2>
+
+    <div class="col-12 row">
+
+        <div class="col-10 row">
+            <div class="col-xs-12 col-sm-8">
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Name:</label>
+                    <div class="col-sm-8">
+                        <label type="text" readonly class="form-control-plaintext">@Supplier.Name</label>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">AddressLine1:</label>
+                    <div class="col-sm-8">
+                        <label type="text" readonly class="form-control-plaintext">@Supplier.AddressLine1</label>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">AddressLine2:</label>
+                    <div class="col-sm-8">
+                        <label type="text" readonly class="form-control-plaintext">@Supplier.AddressLine2</label>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">City:</label>
+                    <div class="col-sm-8">
+                        <label type="text" readonly class="form-control-plaintext">@Supplier.City</label>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">State:</label>
+                    <div class="col-sm-8">
+                        <label type="text" readonly class="form-control-plaintext">@Supplier.State.Name</label>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">PostalCode:</label>
+                    <div class="col-sm-8">
+                        <label type="text" readonly class="form-control-plaintext">@Supplier.PostalCode</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-outline-primary" @onclick="@NavigateToMainview">Back to overview</a>
+    <a class="btn btn-info" href="@($"supplierupdate/{Supplier.Id}")" role="button">Update</a>
+    <a class="btn btn-danger" @onclick="@DeleteSupplier">Delete</a>
+}
